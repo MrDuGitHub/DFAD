@@ -1,0 +1,107 @@
+sudo ovs-vsctl add-br s1
+sudo ovs-vsctl add-br s2
+
+sudo ovs-vsctl set-controller s1 tcp:127.0.0.1:6633
+sudo ovs-vsctl set-controller s2 tcp:127.0.0.1:6633
+
+sudo ovs-vsctl add-port s1 p1
+sudo ovs-vsctl set Interface p1 ofport_request=10
+sudo ovs-vsctl set Interface p1 type=internal
+ethtool -i p1 
+
+sudo ovs-vsctl add-port s1 p2
+sudo ovs-vsctl set Interface p2 ofport_request=11
+sudo ovs-vsctl set Interface p2 type=internal
+ethtool -i p2 
+
+sudo ovs-vsctl add-port s1 p3
+sudo ovs-vsctl set Interface p3 ofport_request=12
+sudo ovs-vsctl set Interface p3 type=internal
+ethtool -i p3 
+
+sudo ovs-vsctl add-port s1 p4
+sudo ovs-vsctl set Interface p4 ofport_request=13
+sudo ovs-vsctl set Interface p4 type=internal
+ethtool -i p4 
+
+sudo ovs-vsctl add-port s2 p5
+sudo ovs-vsctl set Interface p5 ofport_request=1
+sudo ovs-vsctl set Interface p5 type=internal
+ethtool -i p5
+
+sudo ovs-vsctl add-port s2 p6
+sudo ovs-vsctl set Interface p6 ofport_request=2
+sudo ovs-vsctl set Interface p6 type=internal
+ethtool -i p6 
+
+sudo ovs-vsctl add-port s2 p7
+sudo ovs-vsctl set Interface p7 ofport_request=3
+sudo ovs-vsctl set Interface p7 type=internal
+ethtool -i p7
+
+sudo ovs-vsctl add-port s2 p8
+sudo ovs-vsctl set Interface p8 ofport_request=4
+sudo ovs-vsctl set Interface p8 type=internal
+ethtool -i p8
+
+
+sudo ovs-vsctl set interface p4 type=patch
+sudo ovs-vsctl set interface p8 type=patch
+
+sudo ovs-vsctl set interface p4 options:peer=p8
+sudo ovs-vsctl set interface p8 options:peer=p4
+
+
+sudo ip netns add h1 
+sudo ip link set p1 netns h1
+sudo ip netns exec h1 ip addr add 192.168.10.11/24 dev p1
+sudo ip netns exec h1 ifconfig p1 promisc up 
+
+sudo ip netns add h2
+sudo ip link set p2 netns h2
+sudo ip netns exec h2 ip addr add 192.168.10.12/24 dev p2
+sudo ip netns exec h2 ifconfig p2 promisc up
+
+sudo ip netns add h3 
+sudo ip link set p3 netns h3
+sudo ip netns exec h3 ip addr add 192.168.10.13/24 dev p3
+sudo ip netns exec h3 ifconfig p3 promisc up 
+
+sudo ip netns add h5
+sudo ip link set p5 netns h5
+sudo ip netns exec h5 ip addr add 192.168.10.15/24 dev p5
+sudo ip netns exec h5 ifconfig p5 promisc up
+
+sudo ip netns add h6
+sudo ip link set p6 netns h6
+sudo ip netns exec h6 ip addr add 192.168.10.16/24 dev p6
+sudo ip netns exec h6 ifconfig p6 promisc up 
+
+sudo ip netns add h7
+sudo ip link set p7 netns h7
+sudo ip netns exec h7 ip addr add 192.168.10.17/24 dev p7
+sudo ip netns exec h7 ifconfig p7 promisc up
+
+sudo ip netns exec h1 ping 192.168.10.15
+sudo ip netns exec h5 ping 192.168.10.11
+
+
+ryu-manager --verbose ofctl_rest.py simple_switch_13.py
+
+./ITGRecv
+./ITGSend -T UDP -a 127.0.0.1 -c 100 -C 10 -t 200000 -l sender.log -x receiver.log
+
+sudo ip netns exec h5 ./ITGSend -T UDP -a 192.168.10.11 -c 100 -C 10 -t 200000 -l 
+
+sudo ovs-ofctl add-flow s1 "in_port=10,actions=output:11"
+sudo ovs-ofctl add-flow s1 "in_port=11,actions=output:10"
+sudo ovs-ofctl add-flow s2 "in_port=2,actions=output:1"
+sudo ovs-ofctl add-flow s2 "in_port=1,actions=output:2"
+
+curl -X GET http://127.0.0.1:8080/stats/flow/143470608456776
+curl -X GET http://127.0.0.1:8080/stats/switchs
+
+sudo ifconfig eth0:0 192.168.10.10 up
+sudo ifconfig eth0:0 down
+
+iptraf iftop netstat nmap
