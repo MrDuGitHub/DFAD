@@ -13,7 +13,7 @@ def readfile(filename):
 				y.append(float(line[2:len(line)]))
 
 y=[]
-readfile('log.txt')
+readfile('/home/mrd/桌面/log.txt')
 x=[]
 for i in range(len(y)):
 	x.append(i*5+5)

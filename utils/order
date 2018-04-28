@@ -93,6 +93,9 @@ ryu-manager --verbose ofctl_rest.py simple_switch_13.py
 
 sudo ip netns exec h5 ./ITGSend -T UDP -a 192.168.10.11 -c 100 -C 10 -t 200000 -l 
 
+sudo ip netns exec h5 python SynFlood.py 192.168.10.11 10
+sudo ip netns exec h6 python SynFlood.py 192.168.10.11 10
+
 sudo ovs-ofctl add-flow s1 "in_port=10,actions=output:11"
 sudo ovs-ofctl add-flow s1 "in_port=11,actions=output:10"
 sudo ovs-ofctl add-flow s2 "in_port=2,actions=output:1"
