@@ -7,5 +7,7 @@ void init_work();
 double get_H();
 void update_E(double H[],int k);
 void work();
+void set_value(char x,int v0,int v1);
+void get_log(int i);
 
 #endif /*detection.h*/

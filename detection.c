@@ -9,10 +9,10 @@
 
 #define K 10
 
-static const int M=2,W=3,Lambda=3;
 static const double alpha=1.618;
+static int M=2,W=3,Lambda=3;
 
-static int times=0,initial_n=6;
+static int times=0,initial_n=10;
 static double E=0,Delta=0;
 static double hk[K];
 static struct Count t,*c;
@@ -41,7 +41,8 @@ double get_H()
     }
     H/=log(num_X);
 	char s[20];
-	LOG("H=");LOG(double2str(s,H));LOG("\n");
+	LOG("%s%s\n","H=",double2str(s,H));
+	//LOG("H=");LOG(double2str(s,H));LOG("\n");
 	return H;
 }
 
@@ -79,8 +80,10 @@ void update_E(double H[],int k)
         vari=sqrt(vari/K);
         Delta=Lambda*vari;
     }
-	char s[20];
-	LOG("New Delta = ");LOG(double2str(s,Delta));LOG(" New E = ");LOG(double2str(s,E));LOG("\n");;
+	char s[20],s1[20];
+//	printf("%f %f\n",Delta,E);
+	LOG("%s%s%s%s\n","Update: New Delta = ",double2str(s,Delta)," New E = ",double2str(s1,E));
+	//LOG("New Delta = ");LOG(double2str(s,Delta));LOG(" New E = ");LOG(double2str(s,E));LOG("\n");;
 }
 
 void work()
@@ -106,18 +109,19 @@ void work()
             {
                 s0[c->w]='1';
                 c->m++;c->w++;
-				LOG("E-H>Delta! ");			
-				LOG(int2str(l,c->m));LOG("/");LOG(int2str(l,W));LOG("\n");
+				LOG("%s%s%s%s\n","E-H>Delta! ",int2str(l,c->m),"/",int2str(l,W));			
+				//LOG(int2str(l,c->m));LOG("/");LOG(int2str(l,W));LOG("\n");
             }
             else
             {
                 if (s0[0]=='0') c->m++;
-				LOG("E-H>Delta! ");LOG(int2str(l,c->m));LOG("/");LOG(int2str(l,W));LOG("\n");
+				LOG("%s%s%s%s\n","E-H>Delta! ",int2str(l,c->m),"/",int2str(l,W));			
+				//LOG("E-H>Delta! ");LOG(int2str(l,c->m));LOG("/");LOG(int2str(l,W));LOG("\n");
                 for(int i=0;i<W;i++) s0[i]=s0[i+1];
                 s0[W-1]='1';
                 if (c->m>=M) 
 				{	
-					LOG("\nDDos attack!\n");
+					LOG("DDos attack!\n");
 				//	report();
 				}
             }
@@ -134,8 +138,23 @@ void work()
 			}
             update_E(hk,c->k);
         }
-		LOG(s0);LOG("\n");
+		LOG("%s%s\n","Recently : ",s0);
+		//LOG("\n");
     }
 }
 
+void set_value(char x,int v0,int v1)
+{
+	switch (x)
+	{
+		case 'm': M=v0; W=v1;  break;
+		case 'l': Lambda=v0;   break;
+		case 'i': initial_n=v0;break;
+	}
+}
+
+void get_log(int interval)
+{
+	LOG("interval=%d,M=%d,W=%d,Lambda=%d,initial_n=%d\n",interval,M,W,Lambda,initial_n);
+}
 

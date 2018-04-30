@@ -63,9 +63,9 @@ void get_X(int X[])
 	//	printf("X[%d]=%d,RP_Local[%d]=%d\n",i,X[i],i,RP_Local[i]);
     }
 	char s[20];
-	LOG("RP_local[0]=");LOG(int2str(s,RP_Local[0]));LOG(",RP_local[1]=");LOG(int2str(s,RP_Local[1]));
-	LOG(",RP_local[2]=");LOG(int2str(s,RP_Local[2]));LOG("\n");
+//	LOG("RP_local[0]=");LOG(int2str(s,RP_Local[0]));LOG(",RP_local[1]=");LOG(int2str(s,RP_Local[1]));
+//	LOG(",RP_local[2]=");LOG(int2str(s,RP_Local[2]));LOG("\n");
 
-	LOG("X[0]=");LOG(int2str(s,X[0]));LOG(",X[1]=");LOG(int2str(s,X[1]));
-	LOG(",X[2]=");LOG(int2str(s,X[2]));LOG("\n");
+//	LOG("X[0]=");LOG(int2str(s,X[0]));LOG(",X[1]=");LOG(int2str(s,X[1]));
+//	LOG(",X[2]=");LOG(int2str(s,X[2]));LOG("\n");
 }
