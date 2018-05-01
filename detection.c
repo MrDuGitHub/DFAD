@@ -58,8 +58,8 @@ void update_E(double H[],int k)
             E+=a/sum*H[i];
             a*=alpha;
         }
-	    for (int i=0;i<k;i++)
-		    vari+=(H[i]-E)*(H[i]-E);
+   	for (int i=0;i<k;i++)
+	    vari+=(H[i]-E)*(H[i]-E);
         vari=sqrt(vari/k);
         Delta=Lambda*vari;
     }
