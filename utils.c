@@ -5,26 +5,26 @@
 
 char* int2str(char* s,int x)
 {
-	sprintf(s,"%d",x);
-	return s;
+    sprintf(s,"%d",x);
+    return s;
 }
 
 char* double2str(char* s,double x)
 {
-	sprintf(s,"%f",x);
-	return s;
+    sprintf(s,"%f",x);
+    return s;
 }
 
 int str2int(char* s)
 {
-	int v=0,i=0;
-	while (s[i]!='\0')
-	{
-		if (s[i]<'0'||s[i]>'9')return 0;
-		v=v*10+s[i]-'0';
-		i++;	
-	}
-	return v;
+    int v=0,i=0;
+    while (s[i]!='\0')
+    {
+        if (s[i]<'0'||s[i]>'9')return 0;
+        v=v*10+s[i]-'0';
+        i++;	
+    }
+    return v;
 }
 
 char* join(char* s1,char* s2)
