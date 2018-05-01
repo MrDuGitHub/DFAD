@@ -19,8 +19,8 @@ FILE* send_order()
     pipe = popen("sudo ovs-ofctl dump-flows s1 --name", "r");  
     if(NULL == pipe)  
     {
-	    printf("popen() failed: %s\n", cmd);  
-	    return 0;
+	printf("popen() failed: %s\n", cmd);  
+	return 0;
     }
     return pipe;
 }
@@ -35,8 +35,8 @@ void get_flow_data(char* s)
         while(n_packets[i]<='9'&&n_packets[i]>='0')
         {
             num=num*10+n_packets[i]-'0';
-		    i++;
-	    }
+	    i++;
+	}
         for (int i=0;i<strlen(ports);i++)
             if (output[8]==ports[i])
                 RP[i]+=num;
@@ -62,7 +62,7 @@ void get_X(int X[])
         RP_Local[i]=RP[i];
     //	printf("X[%d]=%d,RP_Local[%d]=%d\n",i,X[i],i,RP_Local[i]);
     }
-    char s[20];
+//    char s[20];
 //	LOG("RP_local[0]=");LOG(int2str(s,RP_Local[0]));LOG(",RP_local[1]=");LOG(int2str(s,RP_Local[1]));
 //	LOG(",RP_local[2]=");LOG(int2str(s,RP_Local[2]));LOG("\n");
 
