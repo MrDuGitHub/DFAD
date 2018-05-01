@@ -1,6 +1,5 @@
 # DFAD
-DDos Flooding Attack Detection.  
-An Entropy-Based Distributed DDoS Detection Mechanism in Software-Defined Networking.See more details in [link](http://dl.acm.org/citation.cfm?id=2848539)  
+See more details in [link](http://dl.acm.org/citation.cfm?id=2848539)  
 This project implemented this algorithm and tested it in a virtual network.  
 
 ## Environment
