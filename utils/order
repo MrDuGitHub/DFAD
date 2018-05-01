@@ -82,15 +82,11 @@ sudo ip link set p7 netns h7
 sudo ip netns exec h7 ip addr add 192.168.10.17/24 dev p7
 sudo ip netns exec h7 ifconfig p7 promisc up
 
-sudo ip netns exec h1 ping 192.168.10.15
-sudo ip netns exec h5 ping 192.168.10.11
+//sudo ip netns exec h1 ping 192.168.10.15
+//sudo ip netns exec h5 ping 192.168.10.11
 
 
 ryu-manager --verbose ofctl_rest.py simple_switch_13.py
-
-./ITGRecv
-./ITGSend -T UDP -a 127.0.0.1 -c 512 -C 10 -t 200000 -l sender.log -x receiver.log
-//-C 1000pkt/s -c 512byte/pkt -t 10000ms
 
 sudo ip netns exec h1 sudo ITGRecv
 sudo ip netns exec h5 sudo ITGSend -T TCP -a 192.168.10.11 -o 512 -O 10 -t 200000 -l
@@ -98,6 +94,11 @@ sudo ip netns exec h1 sudo ITGSend -T UDP -a 192.168.10.12 -o 96 -O 20 -t 200000
 
 sudo ip netns exec h5 python SynFlood.py 192.168.10.11 10
 sudo ip netns exec h6 python SynFlood.py 192.168.10.11 10
+
+sudo ./entropy -m 2 3 -l 3 -t 5 -i 10
+
+
+
 
 sudo ovs-ofctl add-flow s1 "in_port=10,actions=output:11"
 sudo ovs-ofctl add-flow s1 "in_port=11,actions=output:10"
