@@ -4,7 +4,7 @@ An Entropy-Based Distributed DDoS Detection Mechanism in Software-Defined Networ
 This project implemented this algorithm and tested it in a virtual network.  
 
 ## Environment
-Ubuntu16.04LST
+Ubuntu16.04LTS
 
 ## Dependence
 * Open vSwitch  
@@ -100,5 +100,6 @@ cd DFAD-0.2/utils
 python Collector.py
 python Draw.py
 ``` 
+> See more details in [order](utils/order)  
 ##Result  
 ![](./img/figure_1-3.png)
