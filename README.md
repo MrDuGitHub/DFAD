@@ -86,11 +86,11 @@ sudo ip netns exec h5 python SynFlood.py 192.168.10.11 10
 ``` 
 ### Entropy
 Start detector.  
-Description of parameters: 
-        * -m M W
-        * -l lambda
-        * -t interval
-        * -i initial_n
+Description of parameters:  
+* -m M W 
+* -l lambda 
+* -t interval 
+* -i initial_n
 ```Bash
 sudo ./entropy -m 2 3 -l 3 -t 5 -i 10
 ``` 
