@@ -19,14 +19,18 @@ for i in range(len(y0)):
 for i in range(len(y1)):
 	x1.append(i*5+5)
 plt.figure(figsize=(12,8)) #创建绘图对象  
-plt.plot(x0,y0,"bo",x0,y0,'k')   #在当前绘图对象绘图（X轴，Y轴，蓝色虚线，线宽度）  
-plt.plot(x1,y1,"ro",x1,y1,'k')
+##plt.plot(x0,y0,"ro-",x0,y0,'k',label='Attack')   #在当前绘图对象绘图（X轴，Y轴，蓝色虚线，线宽度）  
+##plt.plot(x1,y1,"go-",x1,y1,'k',label='Normal')
+plt.plot(x0,y0,"ro-",label='Attack')   #在当前绘图对象绘图（X轴，Y轴，蓝色虚线，线宽度）  
+plt.plot(x1,y1,"bo-",label='Normal')
+##plt.plot(x0,y0,"ro",label='min tax')
 plt.xlabel("Time(s)") #X轴标签  
-plt.ylabel("Entropy")  #Y轴标签  
-plt.title("DDos attack") #图标题 
+plt.ylabel("Normalized Entropy Value")  #Y轴标签  
+plt.title("The normalized entropy value") #图标题 
 my_x_ticks = np.arange(0, 210, 10)
 my_y_ticks = np.arange(0, 1.2, 0.1)
 plt.xticks(my_x_ticks)
 plt.yticks(my_y_ticks)
- 
+
+plt.legend()
 plt.show()  #显示图
