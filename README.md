@@ -81,7 +81,7 @@ sudo ip netns exec h1 sudo ITGRecv
 We use the Python tool Scapy to generate DDoS flooding attack traffic from zombie hosts to the victim.
 ```Bash
 cd DFAD-0.2/utils
-sudo ip netns exec h5 python SynFlood.py 192.168.10.11 10
+sudo ip netns exec h5 python synFlood.py 192.168.10.11 10
 ``` 
 ### Entropy
 Start detector.  
