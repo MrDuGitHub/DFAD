@@ -10,8 +10,8 @@ y1=[]
 fp=open('/home/mrd/桌面/json.txt','r')
 #for line in fp.readlines():
 y=fp.readlines()
-y0=json.loads(y[0])
-y1=json.loads(y[1])
+y0=json.loads(y[2])
+y1=json.loads(y[0])
 x0=[]
 x1=[]
 for i in range(len(y0)):
@@ -21,8 +21,8 @@ for i in range(len(y1)):
 plt.figure(figsize=(12,8)) #创建绘图对象  
 ##plt.plot(x0,y0,"ro-",x0,y0,'k',label='Attack')   #在当前绘图对象绘图（X轴，Y轴，蓝色虚线，线宽度）  
 ##plt.plot(x1,y1,"go-",x1,y1,'k',label='Normal')
-plt.plot(x0,y0,"ro-",label='Attack')   #在当前绘图对象绘图（X轴，Y轴，蓝色虚线，线宽度）  
-plt.plot(x1,y1,"bo-",label='Normal')
+plt.plot(x0,y0,"ro-",label='Attack_C')   #在当前绘图对象绘图（X轴，Y轴，蓝色虚线，线宽度）  
+plt.plot(x1,y1,"bo-",label='Attack_S')
 ##plt.plot(x0,y0,"ro",label='min tax')
 plt.xlabel("Time(s)") #X轴标签  
 plt.ylabel("Normalized Entropy Value")  #Y轴标签  
