@@ -42,7 +42,6 @@ double get_H()
     H/=log(num_X);
     char s[20];
     LOG("%s%s\n","H=",double2str(s,H));
-    //LOG("H=");LOG(double2str(s,H));LOG("\n");
     return H;
 }
 
@@ -81,9 +80,7 @@ void update_E(double H[],int k)
         Delta=Lambda*vari;
     }
     char s[20],s1[20];
-    //	printf("%f %f\n",Delta,E);
     LOG("%s%s%s%s\n","Update: New Delta = ",double2str(s,Delta)," New E = ",double2str(s1,E));
-	//LOG("New Delta = ");LOG(double2str(s,Delta));LOG(" New E = ");LOG(double2str(s,E));LOG("\n");;
 }
 
 void work()
@@ -110,13 +107,11 @@ void work()
                 s0[c->w]='1';
                 c->m++;c->w++;
                 LOG("%s%s%s%s\n","E-H>Delta! ",int2str(l,c->m),"/",int2str(l,W));			
-                //LOG(int2str(l,c->m));LOG("/");LOG(int2str(l,W));LOG("\n");
             }
             else
             {
                 if (s0[0]=='0') c->m++;
                 LOG("%s%s%s%s\n","E-H>Delta! ",int2str(l,c->m),"/",int2str(l,W));			
-                //LOG("E-H>Delta! ");LOG(int2str(l,c->m));LOG("/");LOG(int2str(l,W));LOG("\n");
                 for(int i=0;i<W;i++) s0[i]=s0[i+1];
                 s0[W-1]='1';
                 if (c->m>=M) 
@@ -139,7 +134,6 @@ void work()
             update_E(hk,c->k);
         }
         LOG("%s%s\n","Recently : ",s0);
-	    //LOG("\n");
     }
 }
 

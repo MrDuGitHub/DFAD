@@ -111,4 +111,4 @@ curl -X GET http://127.0.0.1:8080/stats/switches
 sudo ifconfig eth0:0 192.168.10.10 up
 sudo ifconfig eth0:0 down
 
-iptraf iftop netstat nmap
+iptraf iftop netstat nmap iptables

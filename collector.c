@@ -79,7 +79,6 @@ void get_flow_data(char* s)
             }
             break;
         case Controller:
-         //   LOG("s=%s\n",s);
             output=strstr(s,"OUTPUT:");
             while (output!=NULL)
             {
@@ -91,8 +90,6 @@ void get_flow_data(char* s)
                     num=num*10+n_packets[i]-'0';
                     i++;
                	}
-               	
-               //     LOG("\nFUCK%s!\n",output);
                 for (int i=0;i<strlen(ports);i++)
                     if (output[8]==('0'+i))
                     {    RP[i]+=num;}
