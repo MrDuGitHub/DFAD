@@ -105,8 +105,8 @@ sudo ovs-ofctl add-flow s1 "in_port=11,actions=output:10"
 sudo ovs-ofctl add-flow s2 "in_port=2,actions=output:1"
 sudo ovs-ofctl add-flow s2 "in_port=1,actions=output:2"
 
-curl -X GET http://127.0.0.1:8080/stats/flow/143470608456776
-curl -X GET http://127.0.0.1:8080/stats/switchs
+curl -X GET http://127.0.0.1:8080/stats/flow/2739876879950
+curl -X GET http://127.0.0.1:8080/stats/switches
 
 sudo ifconfig eth0:0 192.168.10.10 up
 sudo ifconfig eth0:0 down

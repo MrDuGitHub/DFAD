@@ -5,6 +5,7 @@
 
 #include "entropy.h"
 #include "detection.h"
+#include "collector.h"
 #include "log.h"
 #include "utils.h"
 
@@ -17,6 +18,7 @@ int main(int argc,char *argv[])
         printf("参数错误！\n");
         return 0;
     }
+    int x[10];
     //LOG("");
     loop();
     return 0;
@@ -53,6 +55,10 @@ int parse_options(int argc,char *argv[])
                 i++;t0=str2int(argv[i]);
                 if (!t0) return -1;
                 interval=t0;
+                break;
+            case 's':
+            case 'c':
+                setMode(argv[i][1]);
                 break;
         }
     }
