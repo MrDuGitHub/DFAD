@@ -90,8 +90,10 @@ Description of parameters:
 * -l lambda 
 * -t interval 
 * -i initial_n
+* -s Switch
+* -c Controller
 ```Bash
-sudo ./entropy -m 2 3 -l 3 -t 5 -i 10
+sudo ./entropy -m 2 3 -l 3 -t 5 -i 10 -s
 ``` 
 ### matplotlib
 ```Bash
