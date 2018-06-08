@@ -34,12 +34,14 @@ double get_H()
     for (int i=0;i<num_X;i++) sum_X+=X[i];
     if (sum_X==0) return H;
     H=0;
+    int tx=num_X;
     for (int i=0;i<num_X;i++)
     {
+        if (X[i]<=5) tx--;
         p[i]=X[i]/(double)sum_X;
         if (p[i]!=0)H+=-p[i]*log(p[i]);
     }
-    H/=log(num_X);
+    H/=log(tx);
     char s[20];
     LOG("%s%s\n","H=",double2str(s,H));
     return H;
