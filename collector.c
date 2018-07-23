@@ -6,7 +6,8 @@
 
 static char* ports="123";
 static int RP_Local[num_X],RP[num_X];
-static Mode MODE=Switch;
+static Mode MODE=Controller;
+static char my_switch[20];
 
 void init()
 {
@@ -29,13 +30,16 @@ FILE* send_order()
             }
             break;  
         case Controller:
-            pipe = popen("curl -X GET http://127.0.0.1:8080/stats/switches -s", "r");  
+            /*
+	    pipe = popen("curl -X GET http://127.0.0.1:8080/stats/switches -s", "r");  
             if(NULL == pipe)
             {
                 printf("popen() failed: %s\n", cmd);  
                 return 0;
             }
+	    */
             strcpy(cmd,"curl -X GET http://127.0.0.1:8080/stats/flow/");
+            /*
             char s1[20];
             while(fgets(line, sizeof(line),pipe) != NULL)  
             {  
@@ -44,9 +48,11 @@ FILE* send_order()
                 strcat(cmd,strncpy(s1,strchr(line,',')+2,l));
                 fflush(pipe); 
             }
+	    */
+	    strcat(cmd,my_switch);
             strcat(cmd," -s");
            // printf("%s\n",cmd);
-            pipe = popen(cmd,"r");
+	    pipe = popen(cmd,"r");
             if(NULL == pipe)
             {
                 printf("popen() failed: %s\n", cmd);  
@@ -121,9 +127,10 @@ void get_X(int X[])
     }
 }
 
-void setMode(char c)
+void setMode(char c,char* s)
 {
     if (c=='s') MODE=Switch;
-    if (c=='c') MODE=Controller; 
+    if (c=='c') MODE=Controller;
+    strcpy(my_switch,s);
     //printf("%d\n",MODE); 
 }

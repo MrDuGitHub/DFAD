@@ -9,6 +9,6 @@ void init();
 FILE* send_order();
 void get_flow_data(char* s);
 void get_X(int X[]);
-void setMode(char c);
+void setMode(char c,char* s);
 
 #endif /*collector.h*/

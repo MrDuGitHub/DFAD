@@ -11,14 +11,14 @@
 
 static int interval=5;
 
-int main(int argc,char *argv[])
+int run(int argc,char *argv[])
 {
     if (parse_options(argc,argv))
     {
         printf("参数错误！\n");
         return 0;
     }
-    int x[10];
+    //int x[10];
     //LOG("");
     loop();
     return 0;
@@ -58,7 +58,7 @@ int parse_options(int argc,char *argv[])
                 break;
             case 's':
             case 'c':
-                setMode(argv[i][1]);
+                setMode(argv[i][1],argv[i+1]);i++;
                 break;
         }
     }
