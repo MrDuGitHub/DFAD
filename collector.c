@@ -4,7 +4,7 @@
 #include "utils.h"
 #include "log.h"
 
-static char* ports="123";
+static char* ports="12";
 static int RP_Local[num_X],RP[num_X];
 static Mode MODE=Controller;
 static char my_switch[20];
@@ -51,7 +51,7 @@ FILE* send_order()
 	    */
 	    strcat(cmd,my_switch);
             strcat(cmd," -s");
-           // printf("%s\n",cmd);
+            //printf("%s\n",cmd);
 	    pipe = popen(cmd,"r");
             if(NULL == pipe)
             {
@@ -96,9 +96,14 @@ void get_flow_data(char* s)
                     num=num*10+n_packets[i]-'0';
                     i++;
                	}
-                for (int i=0;i<strlen(ports);i++)
-                    if (output[8]==('0'+i))
-                    {    RP[i]+=num;}
+				//printf("%s\n\n\n",output);
+                for (int i=1;i<=num_X;i++)
+                    if ((output[7]==('0'+i)&&output[8]=='"')||(output[7]=='1'&&output[8]==('0'+i-10)))
+                    {
+			    		RP[i-1]+=num;
+						//printf("%s \n",output);
+						//printf("i=%d num=%d\n",i,num);
+		    		}
                 s=n_packets;
                 output=strstr(s,"OUTPUT:");
             }
@@ -112,7 +117,8 @@ void get_X(int X[])
     char line[4096];
     FILE* pipe=send_order();
     while(fgets(line, sizeof(line),pipe) != NULL)  
-    {  
+    {   
+		//printf("%s\n",line);
         get_flow_data(line);
         fflush(pipe); 
     }  

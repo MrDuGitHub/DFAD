@@ -1,7 +1,7 @@
 #ifndef DFAD_COLLECTOR_H
 #define DFAD_COLLECTOR_H
 
-#define num_X 3
+#define num_X 15
 
 typedef enum Mode{Switch,Controller} Mode;
 

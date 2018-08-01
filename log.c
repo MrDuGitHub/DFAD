@@ -35,7 +35,7 @@ int LOG(const char *format, ...)
 FILE* get_file()
 {
     FILE* Log;
-    if((Log=fopen("..//log.txt","a+"))==NULL)
+    if((Log=fopen("log.txt","a+"))==NULL)
     {
         printf("不能打开日志文件!\n");
         return NULL;
