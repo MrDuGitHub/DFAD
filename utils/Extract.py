@@ -4,13 +4,15 @@
 import json 
 
 y=[]
-f=open('/home/mrd/桌面/log.txt','r')
+f=open('../log.txt','r')
 for line in f.readlines():
 	t=line.find('H=')
 	if t!=-1:
-		y.append(float(line[t+2:len(line)]))
+		if float(line[t+2:len(line)])>0.001:
+			y.append(float(line[t+2:len(line)]))
+print(y)
 s=json.dumps(y)
-fp=open('/home/mrd/桌面/json.txt','a')
+fp=open('json.txt','a')
 fp.write(s+'\n')
 f.close()
 fp.close()

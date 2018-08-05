@@ -31,13 +31,13 @@ FILE* send_order()
             break;  
         case Controller:
             /*
-	    pipe = popen("curl -X GET http://127.0.0.1:8080/stats/switches -s", "r");  
+	   	    pipe = popen("curl -X GET http://127.0.0.1:8080/stats/switches -s", "r");  
             if(NULL == pipe)
             {
                 printf("popen() failed: %s\n", cmd);  
                 return 0;
             }
-	    */
+	    	*/
             strcpy(cmd,"curl -X GET http://127.0.0.1:8080/stats/flow/");
             /*
             char s1[20];
@@ -48,11 +48,10 @@ FILE* send_order()
                 strcat(cmd,strncpy(s1,strchr(line,',')+2,l));
                 fflush(pipe); 
             }
-	    */
-	    strcat(cmd,my_switch);
+	        */
+	   	    strcat(cmd,my_switch);
             strcat(cmd," -s");
-            //printf("%s\n",cmd);
-	    pipe = popen(cmd,"r");
+            pipe = popen(cmd,"r");
             if(NULL == pipe)
             {
                 printf("popen() failed: %s\n", cmd);  
@@ -96,14 +95,10 @@ void get_flow_data(char* s)
                     num=num*10+n_packets[i]-'0';
                     i++;
                	}
-				//printf("%s\n\n\n",output);
-                for (int i=1;i<=num_X;i++)
-                    if ((output[7]==('0'+i)&&output[8]=='"')||(output[7]=='1'&&output[8]==('0'+i-10)))
-                    {
-			    		RP[i-1]+=num;
-						//printf("%s \n",output);
-						//printf("i=%d num=%d\n",i,num);
-		    		}
+				int index = 0;
+				if (output[7]<='9'&&output[7]>='0') index = index*10 + (output[7]-'0');
+				if (output[8]<='9'&&output[8]>='0') index = index*10 + (output[8]-'0');
+				if (index<16&&index>0) RP[index-1]+=num;			
                 s=n_packets;
                 output=strstr(s,"OUTPUT:");
             }
@@ -118,7 +113,6 @@ void get_X(int X[])
     FILE* pipe=send_order();
     while(fgets(line, sizeof(line),pipe) != NULL)  
     {   
-		//printf("%s\n",line);
         get_flow_data(line);
         fflush(pipe); 
     }  
@@ -127,9 +121,12 @@ void get_X(int X[])
     for (int i=0;i<num_X;i++)
     {
         X[i]=RP[i]-RP_Local[i];
-        RP_Local[i]=RP[i];
-    	//printf("X[%d]=%d,RP_Local[%d]=%d\n",i,X[i],i,RP_Local[i]);
-    	LOG("X[%d]=%d,RP_Local[%d]=%d\n",i,X[i],i,RP_Local[i]);
+		LOG("X[%d]=%d,RP_Local[%d]=%d,RP[%d]=%d\n",i,X[i],i,RP_Local[i],i,RP[i]);
+		if (X[i]<0) 
+			X[i]=0;
+		else
+	        RP_Local[i]=RP[i];
+    	
     }
 }
 
@@ -138,5 +135,4 @@ void setMode(char c,char* s)
     if (c=='s') MODE=Switch;
     if (c=='c') MODE=Controller;
     strcpy(my_switch,s);
-    //printf("%d\n",MODE); 
 }

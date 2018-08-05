@@ -18,8 +18,6 @@ int run(int argc,char *argv[])
         printf("参数错误！\n");
         return 0;
     }
-    //int x[10];
-    //LOG("");
     loop();
     return 0;
 }

@@ -40,10 +40,8 @@ double get_H()
         if (X[i]<=5) tx--;
         p[i]=X[i]/(double)sum_X;
         if (p[i]!=0)H+=-p[i]*log(p[i]);
-	//printf("%f ",H);
     }
-    H/=log(tx);
-    //printf("%f \n",H);	
+    H/=log(tx);	
     char s[20];
     LOG("%s%s\n","H=",double2str(s,H));
     return H;
