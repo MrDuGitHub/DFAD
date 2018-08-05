@@ -11,7 +11,7 @@
  sudo tcpreplay -i eno1 10.0.0.11_ping.pcap
  sudo tcpreplay -i eno1 10.0.0.11.pcap
 ```
-3.监测
+3. 监测
 ```Bash
 cd DFAD
 make
